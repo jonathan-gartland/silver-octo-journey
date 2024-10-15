@@ -375,8 +375,8 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.practiceapp4.development;
-				PRODUCT_NAME = PracticeApp4;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.practiceapp4.staging";
+				PRODUCT_NAME = "PracticeApp4";
 				SWIFT_OBJC_BRIDGING_HEADER = "PracticeApp4/PracticeApp4-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -403,8 +403,8 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.practiceapp4.development;
-				PRODUCT_NAME = PracticeApp4;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.practiceapp4.staging";
+				PRODUCT_NAME = "PracticeApp4";
 				SWIFT_OBJC_BRIDGING_HEADER = "PracticeApp4/PracticeApp4-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

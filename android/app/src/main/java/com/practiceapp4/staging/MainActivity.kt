@@ -1,4 +1,4 @@
-package com.practiceapp4.development
+package com.practiceapp4.staging
 
 import android.os.Build
 import android.os.Bundle
