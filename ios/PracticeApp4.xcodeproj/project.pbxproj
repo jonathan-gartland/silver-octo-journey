@@ -380,8 +380,8 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.practiceapp4.development;
-				PRODUCT_NAME = PracticeApp4;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.practiceapp4.staging";
+				PRODUCT_NAME = "PracticeApp4";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -417,8 +417,8 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.practiceapp4.development;
-				PRODUCT_NAME = PracticeApp4;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.practiceapp4.staging";
+				PRODUCT_NAME = "PracticeApp4";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
