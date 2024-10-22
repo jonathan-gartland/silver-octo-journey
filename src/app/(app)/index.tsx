@@ -17,11 +17,12 @@ export default function Home() {
           positive samples using the QuantiTray&reg;, QuantiTray2000&reg; or
           Legiolert systems from IDEXX Laboratories.
         </Text>
-        <Text
-          style={{ ...styles.paragraph, fontStyle: 'italic', fontSize: 10 }}
-        >
-          Disclaimer: This app is not affiliated in any way with IDEXX. For more
-          information please go to the about section.
+        <Text style={styles.disclaimer}>
+          Disclaimer: This app is not affiliated in any way with IDEXX
+          Laboratories. This app and the related code are free and open to use
+          by anyone and will never cost money to use. There is no proprietary
+          information involved that can not be found freely available on the
+          web. For more information please go to the about section.
         </Text>
         <Text></Text>
         <Text></Text>
@@ -65,6 +66,13 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     fontSize: 16,
+    marginBottom: 10,
+    marginLeft: 5,
+    fontFamily: 'cochin',
+  },
+  disclaimer: {
+    fontSize: 10,
+    fontStyle: 'italic',
     marginBottom: 10,
     marginLeft: 5,
     fontFamily: 'cochin',
