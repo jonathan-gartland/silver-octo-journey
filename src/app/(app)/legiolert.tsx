@@ -8,7 +8,8 @@ export default function QtLMpn() {
   const [inL, setInL] = useState(0);
   const [inS, setInS] = useState(0);
 
-  function qt2KMpnL(inLarge: number, inSmall: number) {
+  const qt2KMpnL = (inLarge: number, inSmall: number) => {
+    //function qt2KMpnL(inLarge: number, inSmall: number) {
     let mpn2KList: Mpn = [];
     if (inLarge >= 0 && inLarge <= 6 && inSmall >= 0 && inSmall <= 90) {
       mpn2KList = getQtLegio(inLarge, inSmall);
@@ -24,7 +25,7 @@ export default function QtLMpn() {
         <Text>{mpn2KList !== undefined && mpn2KList}</Text>
       </View>
     );
-  }
+  };
   return (
     <View>
       <Text style={{ ...stylesQt.title, paddingTop: 10 }}>

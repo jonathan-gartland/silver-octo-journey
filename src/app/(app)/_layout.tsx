@@ -2,9 +2,9 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 
 import {
+  About as AboutIcon,
   Home as HomeIcon,
   MpnLookupi,
-  Settings as SettingsIcon,
   //Style as StyleIcon,
 } from '@/ui/icons';
 export default function MpnLayout() {
@@ -51,7 +51,7 @@ export default function MpnLayout() {
         options={{
           title: 'About',
           headerShown: false,
-          tabBarIcon: ({ color }) => <SettingsIcon color={color} />,
+          tabBarIcon: ({ color }) => <AboutIcon color={color} />,
           tabBarTestID: 'about-tab',
         }}
       />
