@@ -17,14 +17,23 @@ export default function Home() {
           positive samples using the QuantiTray&reg;, QuantiTray2000&reg; or
           Legiolert systems from IDEXX Laboratories.
         </Text>
-        <Text style={styles.paragraph}>
-          This app is not affiliated in any way with IDEXX. For more information
-          please read the about section.
+        <Text
+          style={{ ...styles.paragraph, fontStyle: 'italic', fontSize: 10 }}
+        >
+          Disclaimer: This app is not affiliated in any way with IDEXX. For more
+          information please go to the about section.
         </Text>
+        <Text></Text>
+        <Text></Text>
         <Text style={styles.paragraph}>
-          To use: Choose the relevant test below, enter the number of positively
-          identified cells, the MPN will be displayed.
+          To Look up the relevant MPN for your test:
         </Text>
+        <Text></Text>
+        <Text>Choose the relevant test tab below.</Text>
+        <Text></Text>
+        <Text>Enter the number of positively identified cells.</Text>
+        <Text></Text>
+        <Text>The MPN will be displayed.</Text>
       </View>
     );
   };
@@ -34,8 +43,8 @@ export default function Home() {
         <Text style={styles.title}>MPN Lookup</Text>
         <Text style={styles.title}></Text>
         <Text style={styles.title}>Welcome!</Text>
+        <Greeting />
       </View>
-      <Greeting />
     </>
   );
 }
