@@ -11,13 +11,9 @@ import {
 function getMpn(inCount: number) {
   let mpnList: Mpn = [];
   if (inCount >= 0 && inCount <= 51) {
-    mpnList = getQtMpn(inCount);
+    mpnList = getQtMpn(inCount)!;
   }
-
-  const ConfidenceViewTitle: FC<ViewProps> = () => (
-    <Text style={stylesQt.mpnconfTitle}>95% Confidence Interval:</Text>
-  );
-
+  mpnList = mpnList !== undefined ? mpnList : [0, 0, 0];
   return (
     <View>
       <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
@@ -26,12 +22,13 @@ function getMpn(inCount: number) {
             style={{
               ...stylesQt.mpn,
               paddingRight: 150,
+              paddingTop: 20,
             }}
           >
             MPN:
           </Text>
         </View>
-        <View>
+        <View style={{ paddingTop: 20 }}>
           <Text style={stylesQt.mpn}>
             {mpnList !== undefined && mpnList[0]}
             {}
@@ -53,15 +50,62 @@ function getMpn(inCount: number) {
           paddingTop: 30,
         }}
       >
-        <ConfidenceViewTitle />
-        {/*<ConfidenceView mpnList1={mpnList[1]} mpnList2={mpnList[2]} />*/}
+        <Text style={stylesQt.mpnconfTitle}>95% Confidence Interval:</Text>
+        <ConfidenceView
+          mpnList1={mpnList[1].toString()}
+          mpnList2={mpnList[2].toString()}
+        />
       </View>
     </View>
   );
 }
 
+const ConfidenceView: FC<{ mpnList1: string; mpnList2: string }> = ({
+  mpnList1,
+  mpnList2,
+}) => (
+  <View>
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingTop: 10,
+      }}
+    >
+      <View style={{ flex: 1 }}>
+        <Text style={stylesQt.mpnconf}>High</Text>
+      </View>
+      <View style={stylesQt.conf2}>
+        <Text style={stylesQt.mpnconf}>
+          {mpnList2 !== undefined && mpnList2}{' '}
+        </Text>
+      </View>
+    </View>
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingTop: 10,
+      }}
+    >
+      <View style={{ flex: 1 }}>
+        <Text style={stylesQt.mpnconf}>Low: </Text>
+      </View>
+      <View style={stylesQt.conf2}>
+        <Text style={stylesQt.mpnconf}>
+          {mpnList1 !== undefined && mpnList1}{' '}
+        </Text>
+      </View>
+    </View>
+  </View>
+);
+
 const TitleView: FC<ViewProps> = () => (
   <Text style={stylesQt.title}>QuantiTray&reg; MPN</Text>
+);
+
+const MpnView: FC<{ count: number }> = ({ count }) => (
+  <View>{getMpn(count)}</View>
 );
 
 export default function QtMpn() {
@@ -69,46 +113,6 @@ export default function QtMpn() {
   const handleNumberChange = (value: string) => {
     setInCount(Number(value));
   };
-  // const ConfidenceViewTitle: FC<ViewProps> = () => (
-  //   <Text style={stylesQt.mpnconfTitle}>95% Confidence Interval:</Text>
-  // );
-  // const ConfidenceView: FC = () => (
-  //   <View>
-  //     <View
-  //       style={{
-  //         flexDirection: 'row',
-  //         justifyContent: 'center',
-  //         paddingLeft: 80,
-  //         paddingTop: 10,
-  //       }}
-  //     >
-  //       <View style={{ flex: 1 }}>
-  //         <Text style={stylesQt.mpnconf}>High:</Text>
-  //       </View>
-  //       <View style={stylesQt.conf2}>
-  //         <Text style={stylesQt.mpnconf}>
-  //           {/*{mpnList[2] !== undefined && mpnList[2]}{' '}*/}
-  //         </Text></View></View>
-  //     <View
-  //       style={{
-  //         flexDirection: 'row',
-  //         justifyContent: 'center',
-  //         paddingLeft: 80,
-  //         paddingTop: 10,
-  //       }}
-  //     >
-  //       <View style={{ flex: 1 }}>
-  //         <Text style={stylesQt.mpnconf}>Low: </Text>
-  //       </View>
-  //       <View style={stylesQt.conf2}>
-  //         <Text style={stylesQt.mpnconf}>
-  //           {/*{mpnList !== undefined && mpnList[1]}{' '}*/}
-  //         </Text>
-  //       </View>
-  //     </View>
-  //   </View>
-  // );
-
   const InputView: FC<ViewProps> = () => (
     <View
       style={{ justifyContent: 'center', paddingLeft: 0, flexDirection: 'row' }}
@@ -124,19 +128,18 @@ export default function QtMpn() {
       />
     </View>
   );
-  const ReworkMpnView: FC<ViewProps> = () => <View>{getMpn(inCount)}</View>;
+
   return (
     <View>
       <TitleView />
       <InputView />
-      <ReworkMpnView />
+      <MpnView count={inCount} />
     </View>
   );
 }
 
 const stylesQt = StyleSheet.create({
   container: {
-    // padding: 20,
     justifyContent: 'center', // Vertically center the content
     alignItems: 'center', // Horizontally center the content
     flexDirection: 'column',
