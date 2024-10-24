@@ -30,11 +30,15 @@ export default function Home() {
           To Look up the relevant MPN for your test:
         </Text>
         <Text></Text>
-        <Text>Choose the relevant test tab below.</Text>
+        <Text style={styles.paragraph}>
+          Choose the relevant test tab below.
+        </Text>
         <Text></Text>
-        <Text>Enter the number of positively identified cells.</Text>
+        <Text style={styles.paragraph}>
+          Enter the number of positively identified cells.
+        </Text>
         <Text></Text>
-        <Text>The MPN will be displayed.</Text>
+        <Text style={styles.paragraph}>The MPN will be displayed.</Text>
       </View>
     );
   };

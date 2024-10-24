@@ -15,7 +15,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   icon: './assets/noun-science-7188744.png',
   userInterfaceStyle: 'automatic',
   splash: {
-    image: './assets/splash.png',
+    // image: './assets/splash.png',
+    image: './assets/noun-science-7188744.png',
     resizeMode: 'cover',
     backgroundColor: '#2E3C4B',
   },

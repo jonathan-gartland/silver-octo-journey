@@ -18,13 +18,16 @@ export default function QtMpn() {
     }
 
     return (
-      <View style={{}}>
-        <Text>MPN:</Text>
-        {mpnList && mpnList.length === 0 && (
-          <Text data-testid={'empty-value-text'}>
-            Enter valid value please!
-          </Text>
-        )}
+      <View>
+        <View style={{ flexDirection: 'row', flex: 2 }}>
+          <Text style={{ fontFamily: 'cochin' }}>MPN:</Text>
+          {'   ' && mpnList && mpnList.length === 0 && (
+            <Text data-testid={'empty-value-text'}>
+              Enter valid value please!
+            </Text>
+          )}
+        </View>
+
         <Text>{mpnList !== undefined && mpnList[0]}</Text>
         <Text>95% Confidence Interval:</Text>
         <Text>High: {mpnList !== undefined && mpnList[2]}</Text>
@@ -35,7 +38,9 @@ export default function QtMpn() {
 
   return (
     <View>
-      <Text style={{ ...stylesQt.title, paddingTop: 10 }}>
+      <Text
+        style={{ ...stylesQt.title, paddingTop: 10, ...stylesQt.paragraph }}
+      >
         QuantiTray&reg; MPN
       </Text>
       <View
@@ -44,8 +49,10 @@ export default function QtMpn() {
           paddingBottom: 20,
         }}
       >
-        <View style={{}}>
-          <Text>Enter Positive Well Count:</Text>
+        <View style={{ paddingLeft: 80 }}>
+          <Text style={{ ...stylesQt.paragraph }}>
+            Enter Positive Well Count:
+          </Text>
           <TextInput
             style={{
               width: 100,
@@ -53,13 +60,15 @@ export default function QtMpn() {
               borderColor: 'gray',
               borderWidth: 1,
               textAlign: 'center',
+              fontFamily: 'cochin',
             }}
             onChangeText={handleNumberChange}
             value={inCount.toString()}
             keyboardType="numeric"
           />
+          <Text></Text>
+          {getMpn(inCount)}
         </View>
-        {getMpn(inCount)}
       </View>
     </View>
   );
@@ -67,10 +76,11 @@ export default function QtMpn() {
 
 const stylesQt = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     padding: 20,
     justifyContent: 'center', // Vertically center the content
     alignItems: 'center', // Horizontally center the content
+    flexDirection: 'column',
   },
   title: {
     fontSize: 18,
