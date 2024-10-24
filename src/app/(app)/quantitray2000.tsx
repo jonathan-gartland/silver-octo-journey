@@ -10,20 +10,85 @@ function qt2KMpn(inLarge: number, inSmall: number) {
   if (inLarge >= 0 && inLarge <= 49 && inSmall >= 0 && inSmall <= 48) {
     mpn2KList = getQt2KMpn(inLarge, inSmall);
   }
+  mpn2KList = mpn2KList !== undefined ? mpn2KList : [0, 0, 0];
   return (
-    <View style={{}}>
-      <Text>MPN:</Text>
-      {mpn2KList && mpn2KList.length === 0 && (
-        <Text data-testid={'empty-value-text'}>Enter valid values please!</Text>
-      )}
-      <Text>{mpn2KList !== undefined && mpn2KList[0]}</Text>
-      <Text>95% Confidence Interval:</Text>
-      <Text>High: {mpn2KList !== undefined && mpn2KList[2]}</Text>
-      <Text>Low: {mpn2KList !== undefined && mpn2KList[1]}</Text>
+    <View>
+      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+        <View style={{ ...stylesQt.container }}>
+          <Text
+            style={{
+              ...stylesQt.mpn,
+              paddingRight: 150,
+              paddingTop: 20,
+            }}
+          >
+            MPN:
+          </Text>
+        </View>
+        <View>
+          <Text style={stylesQt.mpn}>
+            {mpn2KList !== undefined && mpn2KList[0]}
+          </Text>
+        </View>
+        {mpn2KList && mpn2KList.length === 0 && (
+          <Text data-testid={'empty-value-text'}>
+            Enter valid values please!
+          </Text>
+        )}
+      </View>
+      {/*<Text>{mpn2KList !== undefined && mpn2KList[0]}</Text>*/}
+      {/*<Text style={stylesQt.mpnconfTitle}>95% Confidence Interval:</Text>*/}
+      <ConfidenceView
+        mpnList1={mpn2KList[1].toString()}
+        mpnList2={mpn2KList[2].toString()}
+      />
+
+      {/*<Text>High: {mpn2KList !== undefined && mpn2KList[2]}</Text>*/}
+      {/*<Text>Low: {mpn2KList !== undefined && mpn2KList[1]}</Text>*/}
+      {/*</View>*/}
     </View>
   );
 }
 
+const ConfidenceView: FC<{ mpnList1: string; mpnList2: string }> = ({
+  mpnList1,
+  mpnList2,
+}) => (
+  <View>
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingTop: 10,
+      }}
+    >
+      <View style={{ flex: 1 }}>
+        <Text style={stylesQt.mpnconf}>High</Text>
+      </View>
+      <View style={stylesQt.conf2}>
+        <Text style={stylesQt.mpnconf}>
+          {mpnList2 !== undefined && mpnList2}{' '}
+        </Text>
+      </View>
+    </View>
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingTop: 10,
+      }}
+    >
+      <View style={{ flex: 1 }}>
+        <Text style={stylesQt.mpnconf}>Low: </Text>
+      </View>
+      <View style={stylesQt.conf2}>
+        <Text style={stylesQt.mpnconf}>
+          {mpnList1 !== undefined && mpnList1}{' '}
+        </Text>
+      </View>
+    </View>
+  </View>
+);
 const TitleView: FC<ViewProps> = () => (
   <Text style={{ ...stylesQt.title, paddingTop: 10 }}>
     QuantiTray2000&reg; MPN
@@ -45,39 +110,42 @@ export default function Qt2000Mpn() {
   };
   const InputView: FC<ViewProps> = () => (
     <View>
-      <View
-        style={{
-          paddingLeft: 10,
-          paddingBottom: 20,
-        }}
-      >
-        <View style={{}}>
-          <Text>Enter Large Positive Well Count:</Text>
-          <TextInput
-            style={{
-              width: 100,
-              height: 40,
-              borderColor: 'gray',
-              borderWidth: 1,
-              textAlign: 'center',
-            }}
-            onChangeText={handleLargeNumberChange}
-            value={in2KL.toString()}
-            keyboardType="numeric"
-          />
-          <Text>Enter Small Positive Well Count:</Text>
-          <TextInput
-            style={{
-              width: 100,
-              height: 40,
-              borderColor: 'gray',
-              borderWidth: 1,
-              textAlign: 'center',
-            }}
-            onChangeText={handleSmallNumberChange}
-            value={in2KS.toString()}
-            keyboardType="numeric"
-          />
+      <View>
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <View style={{ flex: 1 }}>
+            <Text style={{ fontSize: 16, paddingLeft: 10, paddingTop: 4 }}>
+              Enter Large Positive Well Count:
+            </Text>
+          </View>
+          <View style={{ position: 'relative', right: 50 }}>
+            <TextInput
+              style={stylesQt.textInput}
+              onChangeText={handleLargeNumberChange}
+              value={in2KL.toString()}
+              keyboardType="numeric"
+            />
+          </View>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            paddingTop: 20,
+          }}
+        >
+          <View style={{ flex: 1 }}>
+            <Text style={{ fontSize: 16, paddingLeft: 10, paddingTop: 4 }}>
+              Enter Small Positive Well Count:
+            </Text>
+          </View>
+          <View style={{ position: 'relative', right: 50 }}>
+            <TextInput
+              style={stylesQt.textInput}
+              onChangeText={handleSmallNumberChange}
+              value={in2KS.toString()}
+              keyboardType="numeric"
+            />
+          </View>
         </View>
       </View>
     </View>
@@ -110,5 +178,31 @@ const stylesQt = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 5,
     fontFamily: 'cochin',
+  },
+  mpn: {
+    fontSize: 18,
+    fontFamily: 'cochin',
+    color: 'red',
+  },
+  mpnconfTitle: {
+    fontSize: 18,
+    fontFamily: 'cochin',
+    color: 'blue',
+  },
+  mpnconf: {
+    fontSize: 16,
+    fontFamily: 'cochin',
+    color: 'blue',
+  },
+  conf1: {},
+  conf2: { flex: 2, paddingLeft: 150 },
+  textInput: {
+    width: 40,
+    height: 30,
+    borderColor: 'gray',
+    borderWidth: 1,
+    textAlign: 'center',
+    fontFamily: 'cochin',
+    fontSize: 16,
   },
 });
