@@ -31,7 +31,6 @@ function getMpn(inCount: number) {
         <View style={{ paddingTop: 20 }}>
           <Text style={stylesQt.mpn}>
             {mpnList !== undefined && mpnList[0]}
-            {}
           </Text>
           {mpnList && mpnList.length === 0 && (
             <Text
@@ -117,7 +116,7 @@ export default function QtMpn() {
     <View
       style={{ justifyContent: 'center', paddingLeft: 0, flexDirection: 'row' }}
     >
-      <Text style={{ paddingRight: 40, paddingTop: 4 }}>
+      <Text style={{ fontSize: 16, paddingRight: 40, paddingTop: 4 }}>
         Enter Positive Well Count:{' '}
       </Text>
       <TextInput
@@ -130,7 +129,7 @@ export default function QtMpn() {
   );
 
   return (
-    <View>
+    <View style={{ paddingTop: 50 }}>
       <TitleView />
       <InputView />
       <MpnView count={inCount} />
@@ -140,6 +139,7 @@ export default function QtMpn() {
 
 const stylesQt = StyleSheet.create({
   container: {
+    left: -15,
     justifyContent: 'center', // Vertically center the content
     alignItems: 'center', // Horizontally center the content
     flexDirection: 'column',
