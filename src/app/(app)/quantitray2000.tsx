@@ -13,39 +13,51 @@ function qt2KMpn(inLarge: number, inSmall: number) {
   mpn2KList = mpn2KList !== undefined ? mpn2KList : [0, 0, 0];
   return (
     <View>
-      <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-        <View style={{ ...stylesQt.container }}>
+      <View
+        style={{
+          flexDirection: 'row',
+          ...stylesQt.container,
+        }}
+      >
+        <View style={{ flex: 1 }}>
           <Text
             style={{
               ...stylesQt.mpn,
-              paddingRight: 150,
               paddingTop: 20,
+              left: 60,
             }}
           >
             MPN:
           </Text>
         </View>
-        <View>
-          <Text style={stylesQt.mpn}>
+        <View style={{ position: 'relative', right: 80, paddingTop: 20 }}>
+          <Text style={{ ...stylesQt.mpn }}>
             {mpn2KList !== undefined && mpn2KList[0]}
           </Text>
         </View>
-        {mpn2KList && mpn2KList.length === 0 && (
-          <Text data-testid={'empty-value-text'}>
-            Enter valid values please!
-          </Text>
-        )}
+        {!mpn2KList ||
+          (mpn2KList.length === 0 && (
+            <Text
+              style={{ ...stylesQt.mpn, top: -10 }}
+              data-testid={'empty-value-text'}
+            >
+              Enter valid{'\n'}value please!
+            </Text>
+          ))}
       </View>
-      {/*<Text>{mpn2KList !== undefined && mpn2KList[0]}</Text>*/}
-      {/*<Text style={stylesQt.mpnconfTitle}>95% Confidence Interval:</Text>*/}
-      <ConfidenceView
-        mpnList1={mpn2KList[1].toString()}
-        mpnList2={mpn2KList[2].toString()}
-      />
-
-      {/*<Text>High: {mpn2KList !== undefined && mpn2KList[2]}</Text>*/}
-      {/*<Text>Low: {mpn2KList !== undefined && mpn2KList[1]}</Text>*/}
-      {/*</View>*/}
+      <View
+        style={{
+          justifyContent: 'center',
+          paddingLeft: 80,
+          paddingTop: 30,
+        }}
+      >
+        <Text style={stylesQt.mpnconfTitle}>95% Confidence Interval:</Text>
+        <ConfidenceView
+          mpnList1={mpn2KList[1].toString()}
+          mpnList2={mpn2KList[2].toString()}
+        />
+      </View>
     </View>
   );
 }
@@ -65,7 +77,7 @@ const ConfidenceView: FC<{ mpnList1: string; mpnList2: string }> = ({
       <View style={{ flex: 1 }}>
         <Text style={stylesQt.mpnconf}>High</Text>
       </View>
-      <View style={stylesQt.conf2}>
+      <View style={{ ...stylesQt.conf2 }}>
         <Text style={stylesQt.mpnconf}>
           {mpnList2 !== undefined && mpnList2}{' '}
         </Text>
@@ -161,7 +173,6 @@ export default function Qt2000Mpn() {
 }
 const stylesQt = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 20,
     justifyContent: 'center', // Vertically center the content
     alignItems: 'center', // Horizontally center the content
