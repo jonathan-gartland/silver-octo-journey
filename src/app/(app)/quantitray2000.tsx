@@ -102,9 +102,7 @@ const ConfidenceView: FC<{ mpnList1: string; mpnList2: string }> = ({
   </View>
 );
 const TitleView: FC<ViewProps> = () => (
-  <Text style={{ ...stylesQt.title, paddingTop: 10 }}>
-    QuantiTray2000&reg; MPN
-  </Text>
+  <Text style={stylesQt.title}>QuantiTray2000&reg; MPN</Text>
 );
 
 const MpnView2K: FC<{ large: number; small: number }> = ({ large, small }) => (
@@ -164,7 +162,7 @@ export default function Qt2000Mpn() {
   );
 
   return (
-    <View>
+    <View style={{ paddingTop: 50 }}>
       <TitleView />
       <InputView />
       <MpnView2K large={in2KL} small={in2KS} />
@@ -178,11 +176,13 @@ const stylesQt = StyleSheet.create({
     alignItems: 'center', // Horizontally center the content
   },
   title: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
     marginTop: 5,
     textAlign: 'center',
+    paddingTop: 10,
+    paddingBottom: 30,
   },
   paragraph: {
     fontSize: 16,

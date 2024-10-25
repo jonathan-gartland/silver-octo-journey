@@ -1,95 +1,172 @@
 import type { Mpn } from 'mpn-lookup/mpn.lookup';
 import { getQtLegio } from 'mpn-lookup/mpn.lookup';
-import { useState } from 'react';
-import { StyleSheet, TextInput } from 'react-native';
+import React, { type FC, useState } from 'react';
+import { StyleSheet, TextInput, type ViewProps } from 'react-native';
 
 import { Text, View } from '@/ui';
+
+const qtMpnL = (inLarge: number, inSmall: number) => {
+  let mpnList: Mpn = [];
+  if (inLarge >= 0 && inLarge <= 6 && inSmall >= 0 && inSmall <= 90) {
+    mpnList = getQtLegio(inLarge, inSmall);
+  }
+  mpnList = mpnList !== undefined ? mpnList : [0, 0, 0];
+  return (
+    <View>
+      <View
+        style={{
+          flexDirection: 'row',
+          ...stylesQt.container,
+          paddingTop: 50,
+        }}
+      >
+        <View>
+          <Text
+            style={{
+              ...stylesQt.mpn,
+              paddingRight: 100,
+            }}
+          >
+            MPN:
+          </Text>
+        </View>
+        <View
+          style={
+            {
+              // position: 'relative',
+              // right: 80,
+              // paddingTop: 20,
+            }
+          }
+        >
+          <Text style={{ ...stylesQt.mpn }}>
+            {mpnList !== undefined && mpnList}
+          </Text>
+        </View>
+        {!mpnList ||
+          (mpnList.length === 0 && (
+            <Text style={{ ...stylesQt.mpn }} data-testid={'empty-value-text'}>
+              Enter valid{'\n'}value please!
+            </Text>
+          ))}
+      </View>
+    </View>
+  );
+};
+const TitleView: FC<ViewProps> = () => (
+  <Text style={{ ...stylesQt.title, paddingTop: 10 }}>Legiolert&reg; MPN</Text>
+);
+
+const MpnViewLe: FC<{ large: number; small: number }> = ({ large, small }) => (
+  <View>{qtMpnL(large, small)}</View>
+);
+
 export default function QtLMpn() {
   const [inL, setInL] = useState(0);
   const [inS, setInS] = useState(0);
-
-  const qt2KMpnL = (inLarge: number, inSmall: number) => {
-    //function qt2KMpnL(inLarge: number, inSmall: number) {
-    let mpn2KList: Mpn = [];
-    if (inLarge >= 0 && inLarge <= 6 && inSmall >= 0 && inSmall <= 90) {
-      mpn2KList = getQtLegio(inLarge, inSmall);
-    }
-    return (
-      <View style={{}}>
-        <Text>MPN:</Text>
-        {mpn2KList && mpn2KList.length === 0 && (
-          <Text data-testid={'empty-value-text'}>
-            Enter valid values please!
-          </Text>
-        )}
-        <Text>{mpn2KList !== undefined && mpn2KList}</Text>
-      </View>
-    );
+  const handleLargeNumberChange = (value: string) => {
+    setInL(Number(value));
   };
-  return (
+  const handleSmallNumberChange = (value: string) => {
+    setInS(Number(value));
+  };
+
+  const InputView: FC<ViewProps> = () => (
     <View>
-      <Text style={{ ...stylesQt.title, paddingTop: 10 }}>
-        Legiolert&reg; MPN
-      </Text>
-      <View
-        style={{
-          paddingLeft: 10,
-          paddingBottom: 20,
-        }}
-      >
-        <View style={{}}>
-          <Text>Enter Large Positive Well Count:</Text>
-          <TextInput
-            style={{
-              width: 100,
-              height: 40,
-              borderColor: 'gray',
-              borderWidth: 1,
-              textAlign: 'center',
-            }}
-            onChangeText={(text) => {
-              setInL(Number(text));
-            }}
-            value={inL.toString()}
-            keyboardType="numeric"
-          />
-          <Text>Enter Small Positive Well Count:</Text>
-          <TextInput
-            style={{
-              width: 100,
-              height: 40,
-              borderColor: 'gray',
-              borderWidth: 1,
-              textAlign: 'center',
-            }}
-            onChangeText={(e) => setInS(Number(e))}
-            value={inS.toString()}
-            keyboardType="numeric"
-          />
+      <View>
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <View style={{ flex: 1 }}>
+            <Text style={{ fontSize: 16, paddingLeft: 30, paddingTop: 4 }}>
+              Enter Large Positive Well Count:
+            </Text>
+          </View>
+          <View style={{ position: 'relative', right: 50 }}>
+            <TextInput
+              style={stylesQt.textInput}
+              onChangeText={handleLargeNumberChange}
+              value={inL.toString()}
+              keyboardType="numeric"
+            />
+          </View>
         </View>
-        {qt2KMpnL(inL, inS)}
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            paddingTop: 20,
+          }}
+        >
+          <View style={{ flex: 1 }}>
+            <Text style={{ fontSize: 16, paddingLeft: 30, paddingTop: 4 }}>
+              Enter Small Positive Well Count:
+            </Text>
+          </View>
+          <View style={{ position: 'relative', right: 50 }}>
+            <TextInput
+              style={stylesQt.textInput}
+              onChangeText={handleSmallNumberChange}
+              value={inS.toString()}
+              keyboardType="numeric"
+            />
+          </View>
+        </View>
       </View>
+    </View>
+  );
+
+  return (
+    <View style={{ paddingTop: 50 }}>
+      <TitleView />
+      <InputView />
+      <MpnViewLe large={inL} small={inS} />
     </View>
   );
 }
 const stylesQt = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 20,
     justifyContent: 'center', // Vertically center the content
     alignItems: 'center', // Horizontally center the content
   },
   title: {
-    fontSize: 18,
+    fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
     marginTop: 5,
     textAlign: 'center',
+    paddingTop: 10,
+    paddingBottom: 30,
   },
   paragraph: {
     fontSize: 16,
     marginBottom: 10,
     marginLeft: 5,
     fontFamily: 'cochin',
+  },
+  mpn: {
+    fontSize: 18,
+    fontFamily: 'cochin',
+    color: 'red',
+  },
+  mpnconfTitle: {
+    fontSize: 18,
+    fontFamily: 'cochin',
+    color: 'blue',
+  },
+  mpnconf: {
+    fontSize: 16,
+    fontFamily: 'cochin',
+    color: 'blue',
+  },
+  conf1: {},
+  conf2: { flex: 2, paddingLeft: 150 },
+  textInput: {
+    width: 40,
+    height: 30,
+    borderColor: 'gray',
+    borderWidth: 1,
+    textAlign: 'center',
+    fontFamily: 'cochin',
+    fontSize: 16,
   },
 });
